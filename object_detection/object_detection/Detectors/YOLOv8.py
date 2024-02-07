@@ -5,12 +5,10 @@ from ..DetectorBase import DetectorBase
 
 
 class YOLOv8(DetectorBase):
-  def __init__(self, conf_threshold = 0.7):
+  def __init__(self):
     
     super().__init__()
     
-    self.conf_threshold = conf_threshold
-
   def build_model(self, model_dir_path, weight_file_name) :
 
     try :
@@ -42,7 +40,7 @@ class YOLOv8(DetectorBase):
       confidence = []
       boxes = []
 
-      result = self.model.predict(self.frame, conf = self.conf_threshold, verbose = False) # Perform object detection on image
+      result = self.model.predict(self.frame, verbose = False) # Perform object detection on image
       row = result[0].boxes.cpu()
 
       for box in row:
